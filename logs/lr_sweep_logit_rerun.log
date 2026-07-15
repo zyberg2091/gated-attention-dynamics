@@ -1,0 +1,80 @@
+nohup: ignoring input
+loading + tokenizing (only as much as needed)...
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 4358/4358 [00:00<00:00, 524664.22 examples/s]
+Generating train split:   0%|          | 0/1801350 [00:00<?, ? examples/s]Generating train split:   6%|▌         | 101000/1801350 [00:00<00:01, 999982.78 examples/s]Generating train split:  12%|█▏        | 214000/1801350 [00:00<00:01, 1071814.60 examples/s]Generating train split:  20%|█▉        | 355000/1801350 [00:00<00:01, 1222719.17 examples/s]Generating train split:  30%|███       | 548000/1801350 [00:00<00:01, 1250936.11 examples/s]Generating train split:  38%|███▊      | 676000/1801350 [00:00<00:00, 1257336.61 examples/s]Generating train split:  45%|████▍     | 810000/1801350 [00:00<00:00, 1281904.17 examples/s]Generating train split:  56%|█████▌    | 1008675/1801350 [00:00<00:00, 1296574.92 examples/s]Generating train split:  67%|██████▋   | 1209675/1801350 [00:00<00:00, 1307062.74 examples/s]Generating train split:  78%|███████▊  | 1406675/1801350 [00:01<00:00, 1304669.41 examples/s]Generating train split:  86%|████████▌ | 1550675/1801350 [00:01<00:00, 1289916.62 examples/s]Generating train split:  93%|█████████▎| 1680675/1801350 [00:01<00:00, 1288577.18 examples/s]Generating train split: 100%|██████████| 1801350/1801350 [00:01<00:00, 1276062.78 examples/s]
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 3760/3760 [00:00<00:00, 896106.77 examples/s]
+     50000 texts ->   5.0M tokens
+    100000 texts ->  10.1M tokens
+    150000 texts ->  15.3M tokens
+samples=100000 vocab=50257 device=cuda
+
+C1 @ 5e-4  (lower LR: should train well, expect suppressor)
+    epoch 1/10 train_loss=4.541
+    epoch 2/10 train_loss=4.375
+    epoch 3/10 train_loss=4.233
+    epoch 4/10 train_loss=4.054
+    epoch 5/10 train_loss=3.789
+    epoch 6/10 train_loss=3.491
+    epoch 7/10 train_loss=3.940
+    epoch 8/10 train_loss=3.604
+    epoch 9/10 train_loss=3.411
+    epoch 10/10 train_loss=3.569
+  -> val_loss=4.14  open=0.05%  closed=4.86%  mean=0.266  |logit|=2.02
+
+C1 @ 1e-3  (baseline suppressor anchor)
+    epoch 1/10 train_loss=4.461
+    epoch 2/10 train_loss=4.273
+    epoch 3/10 train_loss=4.127
+    epoch 4/10 train_loss=3.951
+    epoch 5/10 train_loss=3.709
+    epoch 6/10 train_loss=3.387
+    epoch 7/10 train_loss=3.860
+    epoch 8/10 train_loss=3.526
+    epoch 9/10 train_loss=3.334
+    epoch 10/10 train_loss=3.502
+  -> val_loss=4.08  open=0.03%  closed=6.28%  mean=0.204  |logit|=2.20
+
+C1 @ 3e-3  (broken: high loss, saturated gate)
+    epoch 1/10 train_loss=4.778
+    epoch 2/10 train_loss=4.736
+    epoch 3/10 train_loss=4.653
+    epoch 4/10 train_loss=4.504
+    epoch 5/10 train_loss=4.339
+    epoch 6/10 train_loss=4.129
+    epoch 7/10 train_loss=4.498
+    epoch 8/10 train_loss=4.351
+    epoch 9/10 train_loss=4.111
+    epoch 10/10 train_loss=4.296
+  -> val_loss=4.53  open=23.19%  closed=57.25%  mean=0.287  |logit|=16.57
+
+C3 @ 3e-3  (stable reference for logit magnitude)
+    epoch 1/10 train_loss=4.377
+    epoch 2/10 train_loss=4.215
+    epoch 3/10 train_loss=4.053
+    epoch 4/10 train_loss=3.875
+    epoch 5/10 train_loss=3.545
+    epoch 6/10 train_loss=3.266
+    epoch 7/10 train_loss=3.721
+    epoch 8/10 train_loss=3.385
+    epoch 9/10 train_loss=3.183
+    epoch 10/10 train_loss=3.256
+  -> val_loss=4.12  open=18.60%  closed=30.38%  mean=0.414  |logit|=5.69
+
+
+==================== SUMMARY ====================
+run                                                        val_loss    open   closed  |logit|
+C1 @ 5e-4  (lower LR: should train well, expect suppressor)     4.14   0.05%    4.86%     2.02
+C1 @ 1e-3  (baseline suppressor anchor)                        4.08   0.03%    6.28%     2.20
+C1 @ 3e-3  (broken: high loss, saturated gate)                 4.53  23.19%   57.25%    16.57
+C3 @ 3e-3  (stable reference for logit magnitude)              4.12  18.60%   30.38%     5.69
+
+-------------------- READING --------------------
+TEST 1 (did the suppressor return at a healthy LR?)
+  Compare C1 @ 5e-4 open%  vs  C1 @ 3e-3 open%.
+  If 5e-4 open% is near 0 AND its val_loss is ~3.3, the high-LR
+  extremes were instability, not learned selection.
+
+TEST 2 (is C1's high-LR gate saturated from blow-up?)
+  Compare |logit| for C1 @ 3e-3  vs  C3 @ 3e-3.
+  If C1's |logit| is much larger, its gate hit the rails because
+  the logits exploded, not because it learned a bimodal code.

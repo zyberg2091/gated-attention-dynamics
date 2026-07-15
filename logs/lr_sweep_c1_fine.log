@@ -1,0 +1,103 @@
+nohup: ignoring input
+loading + tokenizing (only as much as needed)...
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 4358/4358 [00:00<00:00, 267530.84 examples/s]
+Generating train split:   0%|          | 0/1801350 [00:00<?, ? examples/s]Generating train split:   2%|▏         | 29000/1801350 [00:00<00:06, 279676.20 examples/s]Generating train split:   5%|▌         | 93000/1801350 [00:00<00:03, 483522.61 examples/s]Generating train split:   9%|▉         | 160000/1801350 [00:00<00:02, 564077.69 examples/s]Generating train split:  13%|█▎        | 234000/1801350 [00:00<00:02, 525598.92 examples/s]Generating train split:  17%|█▋        | 305000/1801350 [00:00<00:02, 580904.36 examples/s]Generating train split:  21%|██        | 373000/1801350 [00:00<00:02, 607805.87 examples/s]Generating train split:  25%|██▌       | 456000/1801350 [00:00<00:02, 567032.12 examples/s]Generating train split:  29%|██▉       | 526000/1801350 [00:00<00:02, 600379.96 examples/s]Generating train split:  34%|███▍      | 613000/1801350 [00:01<00:02, 563190.84 examples/s]Generating train split:  38%|███▊      | 684000/1801350 [00:01<00:01, 597409.72 examples/s]Generating train split:  42%|████▏     | 754000/1801350 [00:01<00:01, 620984.64 examples/s]Generating train split:  47%|████▋     | 842000/1801350 [00:01<00:01, 601065.06 examples/s]Generating train split:  52%|█████▏    | 936675/1801350 [00:01<00:01, 561171.15 examples/s]Generating train split:  56%|█████▌    | 1007675/1801350 [00:01<00:01, 593238.50 examples/s]Generating train split:  60%|█████▉    | 1077675/1801350 [00:01<00:01, 618342.52 examples/s]Generating train split:  65%|██████▍   | 1164675/1801350 [00:02<00:01, 587947.52 examples/s]Generating train split:  69%|██████▊   | 1236675/1801350 [00:02<00:00, 618454.64 examples/s]Generating train split:  73%|███████▎  | 1320675/1801350 [00:02<00:00, 589123.14 examples/s]Generating train split:  77%|███████▋  | 1391675/1801350 [00:02<00:00, 616778.55 examples/s]Generating train split:  81%|████████▏ | 1463675/1801350 [00:02<00:00, 641921.04 examples/s]Generating train split:  86%|████████▌ | 1547675/1801350 [00:02<00:00, 600962.69 examples/s]Generating train split:  90%|████████▉ | 1620675/1801350 [00:02<00:00, 630854.53 examples/s]Generating train split:  95%|█████████▍| 1709675/1801350 [00:02<00:00, 614654.39 examples/s]Generating train split:  99%|█████████▉| 1781675/1801350 [00:02<00:00, 639592.65 examples/s]Generating train split: 100%|██████████| 1801350/1801350 [00:03<00:00, 594664.28 examples/s]
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 3760/3760 [00:00<00:00, 463813.39 examples/s]
+     50000 texts ->   5.0M tokens
+    100000 texts ->  10.1M tokens
+    150000 texts ->  15.3M tokens
+samples=100000 vocab=50257 device=cuda
+
+C1 @ 1.0e-3  (known good)
+    epoch 1/10 train_loss=4.463
+    epoch 2/10 train_loss=4.313
+    epoch 3/10 train_loss=4.162
+    epoch 4/10 train_loss=3.951
+    epoch 5/10 train_loss=3.700
+    epoch 6/10 train_loss=3.390
+    epoch 7/10 train_loss=3.873
+    epoch 8/10 train_loss=3.522
+    epoch 9/10 train_loss=3.329
+    epoch 10/10 train_loss=3.501
+  -> train_loss=3.33  open=0.03%  closed=6.11%  mean=0.205  |logit|=2.20
+
+C1 @ 1.5e-3  (higher, stable?)
+    epoch 1/10 train_loss=4.450
+    epoch 2/10 train_loss=4.274
+    epoch 3/10 train_loss=4.114
+    epoch 4/10 train_loss=3.964
+    epoch 5/10 train_loss=3.665
+    epoch 6/10 train_loss=3.395
+    epoch 7/10 train_loss=3.828
+    epoch 8/10 train_loss=3.490
+    epoch 9/10 train_loss=3.299
+    epoch 10/10 train_loss=3.482
+  -> train_loss=3.30  open=0.08%  closed=8.33%  mean=0.205  |logit|=2.38
+
+C1 @ 2.0e-3  (the decider)
+    epoch 1/10 train_loss=4.466
+    epoch 2/10 train_loss=4.319
+    epoch 3/10 train_loss=4.145
+    epoch 4/10 train_loss=3.964
+    epoch 5/10 train_loss=3.687
+    epoch 6/10 train_loss=3.403
+    epoch 7/10 train_loss=3.828
+    epoch 8/10 train_loss=3.537
+    epoch 9/10 train_loss=3.326
+    epoch 10/10 train_loss=3.453
+  -> train_loss=3.33  open=0.26%  closed=11.36%  mean=0.219  |logit|=2.59
+
+C1 @ 2.5e-3  (near the edge)
+    epoch 1/10 train_loss=4.603
+    epoch 2/10 train_loss=4.487
+    epoch 3/10 train_loss=4.325
+    epoch 4/10 train_loss=4.195
+    epoch 5/10 train_loss=3.911
+    epoch 6/10 train_loss=3.660
+    epoch 7/10 train_loss=4.058
+    epoch 8/10 train_loss=3.781
+    epoch 9/10 train_loss=3.516
+    epoch 10/10 train_loss=3.718
+  -> train_loss=3.52  open=1.78%  closed=24.55%  mean=0.250  |logit|=3.45
+
+C1 @ 3.0e-3  (known broken)
+    epoch 1/10 train_loss=4.726
+    epoch 2/10 train_loss=4.726
+    epoch 3/10 train_loss=4.615
+    epoch 4/10 train_loss=4.538
+    epoch 5/10 train_loss=4.345
+    epoch 6/10 train_loss=4.141
+    epoch 7/10 train_loss=4.581
+    epoch 8/10 train_loss=4.327
+    epoch 9/10 train_loss=4.160
+    epoch 10/10 train_loss=4.305
+  -> train_loss=4.14  open=24.71%  closed=55.28%  mean=0.302  |logit|=16.37
+
+C3 @ 3.0e-3  (stable reference)
+    epoch 1/10 train_loss=4.366
+    epoch 2/10 train_loss=4.224
+    epoch 3/10 train_loss=4.053
+    epoch 4/10 train_loss=3.893
+    epoch 5/10 train_loss=3.589
+    epoch 6/10 train_loss=3.260
+    epoch 7/10 train_loss=3.727
+    epoch 8/10 train_loss=3.330
+    epoch 9/10 train_loss=3.124
+    epoch 10/10 train_loss=3.246
+  -> train_loss=3.12  open=18.37%  closed=30.25%  mean=0.413  |logit|=5.68
+
+
+==================== SUMMARY ====================
+run                                  train_loss    open   closed  |logit|  converged?
+C1 @ 1.0e-3  (known good)                  3.33   0.03%    6.11%     2.20  yes
+C1 @ 1.5e-3  (higher, stable?)             3.30   0.08%    8.33%     2.38  yes
+C1 @ 2.0e-3  (the decider)                 3.33   0.26%   11.36%     2.59  yes
+C1 @ 2.5e-3  (near the edge)               3.52   1.78%   24.55%     3.45  NO (broke)
+C1 @ 3.0e-3  (known broken)                4.14  24.71%   55.28%    16.37  NO (broke)
+C3 @ 3.0e-3  (stable reference)            3.12  18.37%   30.25%     5.68  yes
+
+-------------------- READING --------------------
+Among C1 runs that CONVERGED (train_loss <= ~3.45):
+  - if open% stays near 0  -> C1 is a suppressor even at the highest stable LR.
+  - if open% goes high     -> C1 bimodal while training well (weakens the claim).
+The highest-LR C1 that still converged is the one that settles it.

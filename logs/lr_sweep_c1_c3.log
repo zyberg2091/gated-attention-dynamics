@@ -1,0 +1,82 @@
+nohup: ignoring input
+loading + tokenizing (only as much as needed)...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+     50000 texts ->   5.0M tokens
+    100000 texts ->  10.1M tokens
+    150000 texts ->  15.3M tokens
+samples=100000 vocab=50257 device=cuda
+
+C3 @ 1e-3  (anchor, expect bimodal)
+    epoch 1/10 loss=4.470
+    epoch 2/10 loss=4.294
+    epoch 3/10 loss=4.123
+    epoch 4/10 loss=3.945
+    epoch 5/10 loss=3.668
+    epoch 6/10 loss=3.364
+    epoch 7/10 loss=3.835
+    epoch 8/10 loss=3.524
+    epoch 9/10 loss=3.286
+    epoch 10/10 loss=3.451
+  -> open=9.47%  closed=19.55%  mean=0.397
+
+C1 @ 1e-3  (anchor, expect ~0% open)
+    epoch 1/10 loss=4.461
+    epoch 2/10 loss=4.273
+    epoch 3/10 loss=4.127
+    epoch 4/10 loss=3.951
+    epoch 5/10 loss=3.709
+    epoch 6/10 loss=3.387
+    epoch 7/10 loss=3.860
+    epoch 8/10 loss=3.526
+    epoch 9/10 loss=3.334
+    epoch 10/10 loss=3.502
+  -> open=0.03%  closed=6.28%  mean=0.204
+
+C3 @ 3e-4  (low LR)
+    epoch 1/10 loss=4.702
+    epoch 2/10 loss=4.415
+    epoch 3/10 loss=4.286
+    epoch 4/10 loss=4.068
+    epoch 5/10 loss=3.789
+    epoch 6/10 loss=3.514
+    epoch 7/10 loss=3.994
+    epoch 8/10 loss=3.676
+    epoch 9/10 loss=3.399
+    epoch 10/10 loss=3.562
+  -> open=0.61%  closed=1.86%  mean=0.435
+
+C3 @ 3e-3  (high LR)
+    epoch 1/10 loss=4.377
+    epoch 2/10 loss=4.215
+    epoch 3/10 loss=4.053
+    epoch 4/10 loss=3.875
+    epoch 5/10 loss=3.545
+    epoch 6/10 loss=3.266
+    epoch 7/10 loss=3.721
+    epoch 8/10 loss=3.385
+    epoch 9/10 loss=3.183
+    epoch 10/10 loss=3.256
+  -> open=18.60%  closed=30.38%  mean=0.414
+
+C1 @ 3e-3  (high LR)
+    epoch 1/10 loss=4.778
+    epoch 2/10 loss=4.736
+    epoch 3/10 loss=4.653
+    epoch 4/10 loss=4.504
+    epoch 5/10 loss=4.339
+    epoch 6/10 loss=4.129
+    epoch 7/10 loss=4.498
+    epoch 8/10 loss=4.351
+    epoch 9/10 loss=4.111
+    epoch 10/10 loss=4.296
+  -> open=23.19%  closed=57.25%  mean=0.287
+
+
+==================== SUMMARY ====================
+C3 @ 1e-3  (anchor, expect bimodal)  open=  9.47%   closed= 19.55%
+C1 @ 1e-3  (anchor, expect ~0% open) open=  0.03%   closed=  6.28%
+C3 @ 3e-4  (low LR)                  open=  0.61%   closed=  1.86%
+C3 @ 3e-3  (high LR)                 open= 18.60%   closed= 30.38%
+C1 @ 3e-3  (high LR)                 open= 23.19%   closed= 57.25%
+
+C3 bimodal at every LR + C1 <1% open at high LR  ->  LR-robust.
