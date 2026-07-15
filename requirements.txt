@@ -1,0 +1,11 @@
+# Minimum package versions required to run the released code.
+# Experiments were conducted using the RunPod PyTorch 2.4.0 template and Google Colab.
+# The exact package versions used for the experiments were not preserved.
+# For strict reproducibility, it is recommended to validate dependency versions for your environment and adjust them if necessary.
+
+torch>=2.4
+transformers>=4.41
+datasets>=2.19
+numpy>=1.26
+pandas>=2.0
+matplotlib>=3.8
