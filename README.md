@@ -34,6 +34,9 @@ can be traced to a file in this repository; the map is below.
 │   └── env.txt                     # nvidia-smi + pip freeze from the RunPod pod
 ├── results/
 │   └── main_sweep_per_epoch.csv    # per-epoch train/val series for all 54 sweep runs
+├── figures/
+│   ├── figure_1_gate_value_tails.png      # Emergence of gate-value tails during extended training (L=8, WikiText-103)
+│   └── figure_2_layer_sparsity.png        # Per-layer gate sparsity (fraction of values below 0.1) 
 ```
 
 Scripts are intentionally self-contained (the model class is duplicated verbatim in each
