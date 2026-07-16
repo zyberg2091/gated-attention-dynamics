@@ -143,7 +143,7 @@ automatically from the Hugging Face Hub on first run.
   outputs, and Colab cache paths appear in the saved outputs. A stale Kaggle metadata
   stamp remains in two notebooks from earlier editing sessions; all reported runs executed
   on Colab.
-- **Scripts** (learning-rate analyses): a RunPod instance with an NVIDIA RTX PRO 6000
+- **Scripts** (learning-rate analyses): a RunPod instance with an NVIDIA RTX PRO 4500
   Blackwell.
 
 ## Data and license
