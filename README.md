@@ -31,7 +31,7 @@ can be traced to a file in this repository; the map is below.
 │   ├── lr_sweep_c1_c3.log
 │   ├── lr_sweep_logit_rerun.log
 │   ├── lr_sweep_c1_fine.log
-│   └── env.txt                     # nvidia-smi + pip freeze from the RunPod pod
+│   └── env.txt                     # RunPod pod details
 ├── results/
 │   └── main_sweep_per_epoch.csv    # per-epoch train/val series for all 54 sweep runs
 ├── figures/
