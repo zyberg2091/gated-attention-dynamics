@@ -144,7 +144,7 @@ automatically from the Hugging Face Hub on first run.
   stamp remains in two notebooks from earlier editing sessions; all reported runs executed
   on Colab.
 - **Scripts** (learning-rate analyses): a RunPod instance with an NVIDIA RTX PRO 6000
-  Blackwell. `logs/env.txt` contains the pod's `nvidia-smi` and `pip freeze` output.
+  Blackwell.
 
 ## Data and license
 
