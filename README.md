@@ -23,7 +23,7 @@ can be traced to a file in this repository; the map is below.
 │   ├── extended_wikitext_103_L8.ipynb          # 18-model extended run (WikiText-103, L=8)
 │   ├── ablation_attn_output_norm.ipynb         # C2+ / C3− single-layer ablation
 │   └── param_matched_ffn.ipynb                 # parameter-matched no-gate control
-├── scripts/                        # learning-rate analyses (RunPod; see Hardware 
+├── scripts/                        # learning-rate analyses (RunPod; see Hardware details)
 │   ├── lr_sweep_c1_c3.py           # harness 1: C1/C3 across learning rates
 │   ├── lr_sweep_logit_rerun.py     # deterministic re-execution adding |logit| + C1@5e-4
 │   └── lr_sweep_c1_fine.py         # harness 2: fine-grained C1 stability sweep
