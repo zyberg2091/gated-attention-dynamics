@@ -209,4 +209,3 @@ if __name__ == "__main__":
     print("\n==================== SUMMARY ====================")
     for name, r in out:
         print(f"{name:<36} open={r['open']:6.2f}%   closed={r['closed']:6.2f}%")
-    print("\nC3 bimodal at every LR + C1 <1% open at high LR  ->  LR-robust.")
