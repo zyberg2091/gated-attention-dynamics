@@ -26,7 +26,7 @@ can be traced to a file in this repository; the map is below.
 ├── scripts/                        # learning-rate analyses (RunPod; see Hardware details)
 │   ├── lr_sweep_c1_c3.py           # harness 1: C1/C3 across learning rates
 │   ├── lr_sweep_logit_rerun.py     # deterministic re-execution adding |logit| + C1@5e-4
-│   └── lr_sweep_c1_fine.py         # harness 2: fine-grained C1 stability sweep
+│   ├── lr_sweep_c1_fine.py         # harness 2: fine-grained C1 stability sweep
 │   └── env.txt
 ├── logs/                           # raw stdout of each script run (names mirror scripts 1:1)
 │   ├── lr_sweep_c1_c3.log
@@ -50,7 +50,7 @@ that correspondence rather than refactor after the fact.
 
 | Paper artifact | File | Where to look |
 |---|---|---|
-| Tables 1 (main column), 4, 8 (main-sweep rows), 9; Tables 6–7 (Appendix A) | `notebooks/main_sweep_54_models_wikitext_2.ipynb` | The multi-seed loop cell (`SEEDS = [42, 113, 192]` × depths `[4, 8, 12]` × 3 configs × 2 arms = 54 runs). The saved output shows the final session (seed 192) plus the disclosed warm-up cells; the full per-epoch record for all seeds is `results/main_sweep_per_epoch.csv` |
+| Tables 1 (main column), 4, 8 (main-sweep rows), 9; Tables 6–7 (Appendix A) | `notebooks/main_sweep_54_models_wikitext_2.ipynb` | The multi-seed loop cell (`SEEDS = [42, 113, 192]` × depths `[4, 8, 12]` × 3 configs × 2 arms = 54 runs). The saved output shows the final session (seed 192) plus six preliminary warm-up cells above the loop (one run per config × arm; not table inputs); the full per-epoch record for all seeds is `results/main_sweep_per_epoch.csv` |
 | Tables 1 (extended column), 2, 5, 8 (WT-103 rows), 10; Figures 1 (C1/C2/C3 curves) and 2 | `notebooks/extended_wikitext_103_L8.ipynb` | 18 runs, one banner per (config, arm, seed). Gate statistics are the `Step 14500` log lines (see protocol below) |
 | Table 3; Figure 1 (C2+ and C3− curves) | `notebooks/ablation_attn_output_norm.ipynb` | 6 new gated runs (C2+ and C3− × seeds 12/42/100). The C2 and C3 comparison cells are carried over verbatim from `extended_wikitext_103_L8.ipynb` (outputs byte-identical), so Table 3's C2/C3 rows are the extended-run models |
 | Table 11 | `notebooks/param_matched_ffn.ipynb` (widened no-gate column) + `extended_wikitext_103_L8.ipynb` (original and gated columns) | 9 widened runs (FFN 1024 → 1152), same recipe and seeds |
