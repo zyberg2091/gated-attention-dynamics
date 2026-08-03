@@ -1,19 +1,20 @@
 """
-c1_instability_test.py
+c1_lr_saturation_test.py
 
-Question: is C1's "bimodality" at high LR real selection or just training blow-up?
+Question: how does C1's high-LR boundary-heavy gate differ from its lower-LR
+suppressor regime?
 
 Two tests in one run:
-  TEST 1 (match the loss): train C1 at a lower LR so it trains well (~3.3).
-          If the gate goes back to a suppressor (open ~0%), the high-LR
-          extremes were instability, not learned structure.
+  TEST 1 (LR sensitivity): train C1 at a lower LR.
+          If the gate returns to a suppressor (open ~0%), the high-LR
+          boundary mass is strongly learning-rate dependent.
   TEST 2 (logit magnitude): print mean |gate logit| for C1@3e-3 vs C3@3e-3.
-          If C1's is much larger, its gate saturated from blow-up.
+          If C1's is much larger, its gate is more severely saturated.
 
 Each line reports:  val_loss | open% | closed% | mean gate | mean|logit|
-  - val_loss  : lower = trained better. ~3.3 is "healthy", ~4.1 is "broke".
-  - open%     : gate values > 0.99
-  - closed%   : gate values < 0.01
+  - val_loss   : final-batch diagnostic only; not used in the conclusion
+  - open%      : gate values > 0.99
+  - closed%    : gate values < 0.01
   - mean|logit|: average magnitude of the pre-sigmoid gate value. Big = saturated.
 """
 import os
