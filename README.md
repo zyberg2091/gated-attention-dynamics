@@ -54,7 +54,7 @@ that correspondence rather than refactor after the fact.
 | Tables 1 (extended column), 2, 5, 8 (WT-103 rows), 10; Figures 1 (C1/C2/C3 curves) and 2 | `notebooks/extended_wikitext_103_L8.ipynb` | 18 runs, one banner per (config, arm, seed). Gate statistics are the `Step 14500` log lines (see protocol below) |
 | Table 3; Figure 1 (C2+ and C3− curves) | `notebooks/ablation_attn_output_norm.ipynb` | 6 new gated runs (C2+ and C3− × seeds 12/42/100). The C2 and C3 comparison cells are carried over verbatim from `extended_wikitext_103_L8.ipynb` (outputs byte-identical), so Table 3's C2/C3 rows are the extended-run models |
 | Table 11 | `notebooks/param_matched_ffn.ipynb` (widened no-gate column) + `extended_wikitext_103_L8.ipynb` (original and gated columns) | 9 widened runs (FFN 1024 → 1152), same recipe and seeds |
-| Table 12 | `scripts/lr_sweep_c1_c3.py` → `logs/lr_sweep_c1_c3.log` (five rows) and `scripts/lr_sweep_logit_rerun.py` → `logs/lr_sweep_logit_rerun.log` (the C1@5e-4 row and the entire \|logit\| column) | "Loss" = the minimum end-of-epoch loss line of each run (`loss=` in harness 1's log, `train_loss=` in the rerun) |
+| Table 12 | `scripts/lr_sweep_c1_c3.py` → `logs/lr_sweep_c1_c3.log` (five rows) and `scripts/lr_sweep_logit_rerun.py` → `logs/lr_sweep_logit_rerun.log` (the C1@5e-4 row and the entire \|logit\| column) | Harness 1 provides the reported open, closed, and mean-gate values; the deterministic rerun provides the C1@5e-4 row and the \|logit\| values |
 | Table 13 | `scripts/lr_sweep_c1_fine.py` → `logs/lr_sweep_c1_fine.log` | All six rows, including the C3 reference |
 | First-token attention mass (sink diagnostic) | `Sink Val=` fields in the notebooks' step logs | Logged values span 1.7–8.8% across the four notebooks; the paper reports no dedicated sink evaluation (see its Limitations) |
 
@@ -102,12 +102,11 @@ initialized with zero weights and bias 2.0 (sigmoid ≈ 0.88).
 - **Gate statistics (Tables 2–3).** Computed in training mode on the final logged batch
   (epoch 10, step 14,500), pooled over every token, head, and coordinate in the batch,
   then averaged across seeds. Thresholds: closed < 0.01, open > 0.99, sparsity < 0.1.
-- **LR-sweep tables (12–13).** Single seed (12), 100,000-sample budget. "Loss" is the
-  minimum end-of-epoch loss value in the log (`loss=` in harness 1's log, `train_loss=`
-  in harness 2's log and the rerun). `lr_sweep_logit_rerun.py`
-  additionally prints a *validation* loss in its summary and labels it as such; it is not
-  the table quantity. `|logit|` is the mean absolute pre-sigmoid gate value over 50
-  validation batches, measured in a deterministic re-execution under the fixed seed.
+- **LR-sweep tables (12–13).** Single seed (12), 100,000-sample budget. `Mean` is the
+  mean gate value; `% open` and `% closed` use thresholds > 0.99 and < 0.01,
+  respectively. `|logit|` is the mean absolute pre-sigmoid gate value over 50
+  validation batches at end of training. The Table 12 `|logit|` values and C1@5e-4
+  row come from a deterministic re-execution under the fixed seed.
 
 **Known label quirk (does not affect results).** In
 `ablation_attn_output_norm.ipynb`, the seed-42/100 banner cells of the C2+ section print
