@@ -3,8 +3,8 @@ lr_check.py  -  Does the gate stay bimodal (C3) / suppressor (C1) across learnin
 
 Reads: one line per run -> % open and % closed gate coordinates.
 
-C3 should stay ~10% open at every LR. C1 should stay ~0% open even at high LR.
-If that holds, the bimodality is not an artifact of lr=1e-3.
+C3's open tail is expected to strengthen with learning rate.
+C1 should remain suppressive across its stable learning-rate range.
 """
 import os
 os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
