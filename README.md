@@ -1,7 +1,7 @@
 # Gating and Normalization Interact in the Attention Block
 
 Code, notebooks, and raw logs for the paper *Gating and Normalization Interact in the
-Attention Block* (under double-blind review; author information withheld).
+Attention Block* (under double-blind review).
 
 We train small causal transformers (29–36M parameters) from scratch and study how an
 elementwise sigmoid attention-output gate interacts with normalization placement
